@@ -12,8 +12,8 @@ yarn dev
 - `NextJS`
 - `PlanetScale` database-as-a-service
 - `Prisma` ORM
-- `tRPC` for type-safety between client and server
-- `Radix-ui` unstyled accesible component library
+- `tRPC` type-safety between client and server
+- `Radix-ui` unstyled accessible component library
 - `Radix-ui/colors` color-palettes
 - `Stitches` CSS in JS
 
