@@ -1,10 +1,73 @@
+import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Heading } from '@chakra-ui/react'
 import styles from '../styles/Home.module.css'
 
+const addApp = async (formData: any) => {
+  return await fetch('/api/apps', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Object.fromEntries(formData)),
+  }).then(x => x.json())
+}
+
+const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault()
+  const formElement = document.querySelector('#form')
+  const formData = new FormData(formElement as HTMLFormElement) as any
+  try {
+    const response = await addApp(formData)
+    if (response.status === 200) {
+      console.log('success')
+    }
+  } catch (error) {
+    console.log('submission failure', error)
+  }
+}
+
+const Form = ({
+  handleFormSubmit,
+}: {
+  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>
+}) => (
+  <form id="form" onSubmit={handleFormSubmit}>
+    <div>
+      <input type="text" name="name" id="name" placeholder="name of application" />
+    </div>
+    <div>
+      <input type="text" name="type" id="type" placeholder="type of application" />
+    </div>
+    <div>
+      <input type="number" name="priority" id="priority" placeholder="priority of application" />
+    </div>
+    <div>
+      <input type="text" name="notes" id="notes" placeholder="notes of application" />
+    </div>
+    <button type="submit">Add</button>
+  </form>
+)
+
 const Home: NextPage = () => {
+  const [apps, setApps] = useState([])
+
+  const getApps = async () => {
+    try {
+      const appsResponse = await fetch('/api/apps', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }).then(x => x.json())
+
+      setApps(appsResponse.data)
+    } catch (error) {
+      console.log('could not get apps')
+    }
+  }
+
+  useEffect(() => {
+    getApps()
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +76,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Heading>I am a heading</Heading>
+      <Heading>Apps to build</Heading>
+      {apps.map(({ name, type, priority, notes }) => (
+        <div>name: {name}</div>
+      ))}
+      <br />
+      <br />
+      <br />
+      <br />
+      <Form handleFormSubmit={handleFormSubmit} />
     </div>
   )
 }
