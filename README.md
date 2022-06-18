@@ -11,7 +11,7 @@ yarn dev
 ```
 
 Todo
-[ ] Add component library
-[ ] Add simple endpoint
-[ ] Add PlanetScale
+[x] Add component library
+[x] Add PlanetScale
+[x] Add simple endpoint
 [ ] Add tRPC
