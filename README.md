@@ -1,14 +1,9 @@
 ## Getting Started
 
-Run the development server:
-
-```bash
-yarn dev
-```
-
-- Run the database with `pscale connect whatthedevnews main --port 3309`
-- View the database with `npx prisma studio`
-- To update the database, make schema changes then follow the [PlanetScale workflow](https://docs.planetscale.com/concepts/nonblocking-schema-changes#planetscale-workflow)
+- Run the dev server: `yarn dev`
+- Run the database: `pscale connect whatthedevnews main --port 3309`
+- View the database: `npx prisma studio`
+- To update the database, make schema changes then follow the [PlanetScale workflow](https://docs.planetscale.com/concepts/nonblocking-schema-changes#planetscale-workflow) guide
 
 ## Stack
 
@@ -26,7 +21,7 @@ yarn dev
 - [x] Add PlanetScale
 - [x] Add simple endpoint
 - [x] Add simple design guide and CSS reset
-- [ ] Add simple Radix components
+- [x] Add simple Radix components
 - [ ] Add tRPC
 - [ ] Add BFF for consuming API of dev.to, medium, youtube etc. and enforcing a consistent client response
 - [ ] Add localization
