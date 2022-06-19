@@ -1,4 +1,4 @@
-import { styled } from '../../../../stitches.config'
+import { styled, config } from '../../../../stitches.config'
 import { Label } from '../Label/Label'
 import { LabelProps } from '../Label/Label'
 
@@ -35,6 +35,7 @@ export const Input = ({
         autoFocus={shouldAutoFocus}
         value={value}
         name={name}
+        id={name}
         type={type}
         placeholder={placeholder}
         onChange={onChange}
@@ -58,11 +59,11 @@ const InputStyled = styled('input', {
   height: 35,
   fontSize: 15,
   lineHeight: 1,
-  color: 'white',
+  color: '$default',
   backgroundColor: 'transparent',
-  boxShadow: `0 0 0 1px blue`,
+  boxShadow: `0 0 0 1px ${config.theme.colors.primary}`,
 
   '&:focus': {
-    boxShadow: `0 0 0 2px black`,
+    boxShadow: `0 0 0 2px ${config.theme.colors.primary}`,
   },
 })

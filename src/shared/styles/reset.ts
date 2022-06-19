@@ -3,7 +3,7 @@ import { globalCss } from '../../../stitches.config'
 export const globalStyles = globalCss({
   html: {
     backgroundColor: '$sand4',
-    color: '$sand11',
+    color: '$default',
     fontFamily: '$default',
     fontSize: '62.5%',
     boxSizing: 'border-box',

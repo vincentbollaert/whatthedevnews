@@ -6,6 +6,8 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
     colors: {
       ...sand,
 
+      default: sand.sand11,
+
       primary: cyan.cyan8,
       secondary: sand.sand10,
 
