@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Button } from '../shared/components/Button/Button'
-import { globalStyles } from '../shared/styles/reset';
+import { globalStyles } from '../shared/styles/reset'
+import { Input } from '../shared/components/Input/Input'
 
 const addApp = async (formData: any) => {
   return await fetch('/api/apps', {
@@ -33,16 +34,16 @@ const Form = ({
 }) => (
   <form id="form" onSubmit={handleFormSubmit}>
     <div>
-      <input type="text" name="name" id="name" placeholder="name of application" />
+      <Input label="name" name="name" placeholder="name of application" />
     </div>
     <div>
-      <input type="text" name="type" id="type" placeholder="type of application" />
+      <Input label="type" name="type" placeholder="type of application" />
     </div>
     <div>
-      <input type="number" name="priority" id="priority" placeholder="priority of application" />
+      <Input type="text" label="priority" name="priority" placeholder="priority of application" />
     </div>
     <div>
-      <input type="text" name="notes" id="notes" placeholder="notes of application" />
+      <Input label="notes" name="notes" placeholder="notes of application" />
     </div>
     <Button>Add</Button>
     <Button status="loading">loading</Button>
@@ -53,7 +54,7 @@ const Form = ({
 
 const Home: NextPage = () => {
   const [apps, setApps] = useState([])
-  globalStyles();
+  globalStyles()
 
   const getApps = async () => {
     try {
@@ -81,7 +82,6 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Apps to build</h1>
-      <Label.Root about="sdsd" />
       {apps.map(({ name, type, priority, notes }) => (
         <div>name: {name}</div>
       ))}

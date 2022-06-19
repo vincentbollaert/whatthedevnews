@@ -32,6 +32,7 @@ export const globalStyles = globalCss({
     outline: 'none',
   },
   input: {
+    all: 'unset', // try assigning this to all properties same as box-sizing
     '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
       '-webkit-appearance': 'none',
     },
