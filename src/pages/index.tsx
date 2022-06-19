@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
+import * as Label from '@radix-ui/react-label'
 import Head from 'next/head'
+import { Button } from '../shared/components/Button/Button'
+import { globalStyles } from '../shared/styles/reset';
 
 const addApp = async (formData: any) => {
   return await fetch('/api/apps', {
@@ -42,12 +45,16 @@ const Form = ({
     <div>
       <input type="text" name="notes" id="notes" placeholder="notes of application" />
     </div>
-    <button type="submit">Add</button>
+    <Button>Add</Button>
+    <Button status="loading">loading</Button>
+    <Button status="disabled">disabled</Button>
+    <Button status="error">error</Button>
   </form>
 )
 
 const Home: NextPage = () => {
   const [apps, setApps] = useState([])
+  globalStyles();
 
   const getApps = async () => {
     try {
@@ -75,6 +82,7 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Apps to build</h1>
+      <Label.Root about="sdsd" />
       {apps.map(({ name, type, priority, notes }) => (
         <div>name: {name}</div>
       ))}
