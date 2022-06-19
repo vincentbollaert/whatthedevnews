@@ -9,6 +9,7 @@ yarn dev
 ```
 
 ## Stack
+
 - [NextJS](https://nextjs.org)
 - [PlanetScale](https://planetscale.com) database-as-a-service
 - [Prisma](https://www.prisma.io) ORM
@@ -18,8 +19,13 @@ yarn dev
 - [Stitches](https://stitches.dev/) CSS in JS
 
 ## Todo
+
 - [x] Add component library
 - [x] Add PlanetScale
 - [x] Add simple endpoint
+- [x] Add simple design guide and CSS reset
+- [ ] Add simple Radix components
 - [ ] Add tRPC
+- [ ] Add BFF for consuming API of dev.to, medium, youtube etc. and enforcing a consistent client response
+- [ ] Add localization
 - [ ] Add tests
