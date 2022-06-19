@@ -1,12 +1,14 @@
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
+
+- Run the database with `pscale connect whatthedevnews main --port 3309`
+- View the database with `npx prisma studio`
+- To update the database, make schema changes then follow the [PlanetScale workflow](https://docs.planetscale.com/concepts/nonblocking-schema-changes#planetscale-workflow)
 
 ## Stack
 
