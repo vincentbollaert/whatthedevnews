@@ -19,3 +19,11 @@ model App {
   type     String
   notes    String?
 }
+
+model Post {
+  id          Int    @id @default(autoincrement())
+  author      String
+  title       String
+  description String
+  url         String
+}
