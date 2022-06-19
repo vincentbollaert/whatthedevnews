@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
-import * as Label from '@radix-ui/react-label'
 import Head from 'next/head'
 import { Button } from '../shared/components/Button/Button'
 import { globalStyles } from '../shared/styles/reset';
