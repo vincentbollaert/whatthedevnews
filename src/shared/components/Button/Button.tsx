@@ -1,4 +1,4 @@
-import { css, styled } from '../../../../stitches.config'
+import { css, styled } from '~/../stitches.config'
 
 type Props = {
   status?: 'loading' | 'error' | 'disabled'

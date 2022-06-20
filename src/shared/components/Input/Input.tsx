@@ -1,4 +1,4 @@
-import { styled, config } from '../../../../stitches.config'
+import { styled, config } from '~/../stitches.config'
 import { Label } from '../Label/Label'
 import { LabelProps } from '../Label/Label'
 

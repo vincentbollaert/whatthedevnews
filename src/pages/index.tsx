@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Button } from '../shared/components/Button/Button'
-import { globalStyles } from '../shared/styles/reset'
-import { Input } from '../shared/components/Input/Input'
+import { Button, Input } from '~/shared/components'
+import { globalStyles } from '~/shared/styles/reset'
 
 const addApp = async (formData: any) => {
   return await fetch('/api/apps', {
