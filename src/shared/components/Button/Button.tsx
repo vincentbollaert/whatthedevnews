@@ -1,22 +1,22 @@
-import { css, styled } from '~/../stitches.config'
+import { css, styled } from '~/../stitches.config';
 
 type Props = {
-  status?: 'loading' | 'error' | 'disabled'
-  type?: 'button' | 'submit' | 'reset'
-  children: React.ReactNode
-  onClick?: () => void
-}
+  status?: 'loading' | 'error' | 'disabled';
+  type?: 'button' | 'submit' | 'reset';
+  children: React.ReactNode;
+  onClick?: () => void;
+};
 export const Button = ({ status, type = 'button', children, onClick = () => undefined }: Props) => (
   <SButton type={type} status={status} disabled={status === 'disabled'} onClick={() => onClick()}>
     {children}
   </SButton>
-)
+);
 
 const disabledStyles = css({
   '&:disabled': {
     pointerEvents: 'none',
   },
-})
+});
 
 const SButton = styled('button', disabledStyles, {
   backgroundColor: '$primary',
@@ -35,7 +35,7 @@ const SButton = styled('button', disabledStyles, {
       error: {
         backgroundColor: '$error1',
       },
-      disabled: {}
+      disabled: {},
     },
   },
-})
+});

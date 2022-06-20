@@ -1,19 +1,19 @@
-import { styled, config } from '~/../stitches.config'
-import { Label } from '../Label/Label'
-import { LabelProps } from '../Label/Label'
+import { styled, config } from '~/../stitches.config';
+import { Label } from '../Label/Label';
+import { LabelProps } from '../Label/Label';
 
 type InputProps = {
-  shouldAutoFocus?: boolean
-  name: string
-  type?: 'text' | 'number'
-  value?: string | number
-  placeholder: string
-  status?: 'loading' | 'error' | 'disabled'
-  className?: string
-  children?: React.ReactNode
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-}
-type Props = InputProps & LabelProps
+  shouldAutoFocus?: boolean;
+  name: string;
+  type?: 'text' | 'number';
+  value?: string | number;
+  placeholder: string;
+  status?: 'loading' | 'error' | 'disabled';
+  className?: string;
+  children?: React.ReactNode;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+type Props = InputProps & LabelProps;
 
 export const Input = ({
   shouldAutoFocus,
@@ -46,8 +46,8 @@ export const Input = ({
         {children && children}
       </InputStyled>
     </div>
-  )
-}
+  );
+};
 
 const InputStyled = styled('input', {
   width: 200,
@@ -66,4 +66,4 @@ const InputStyled = styled('input', {
   '&:focus': {
     boxShadow: `0 0 0 2px ${config.theme.colors.primary}`,
   },
-})
+});

@@ -1,4 +1,4 @@
-import { globalCss } from '~/../stitches.config'
+import { globalCss } from '~/../stitches.config';
 
 export const globalStyles = globalCss({
   html: {
@@ -66,4 +66,4 @@ export const globalStyles = globalCss({
   th: {
     textAalign: 'left',
   },
-})
+});

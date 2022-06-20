@@ -1,35 +1,35 @@
-import { useEffect, useState } from 'react'
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import { Button, Input } from '~/shared/components'
-import { globalStyles } from '~/shared/styles/reset'
+import { useEffect, useState } from 'react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { Button, Input } from '~/shared/components';
+import { globalStyles } from '~/shared/styles/reset';
 
 const addApp = async (formData: any) => {
   return await fetch('/api/apps', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(Object.fromEntries(formData)),
-  }).then(x => x.json())
-}
+  }).then((x) => x.json());
+};
 
 const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault()
-  const formElement = document.querySelector('#form')
-  const formData = new FormData(formElement as HTMLFormElement) as any
+  event.preventDefault();
+  const formElement = document.querySelector('#form');
+  const formData = new FormData(formElement as HTMLFormElement) as any;
   try {
-    const response = await addApp(formData)
+    const response = await addApp(formData);
     if (response.status === 200) {
-      console.log('success')
+      console.log('success');
     }
   } catch (error) {
-    console.log('submission failure', error)
+    console.log('submission failure', error);
   }
-}
+};
 
 const Form = ({
   handleFormSubmit,
 }: {
-  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>
+  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }) => (
   <form id="form" onSubmit={handleFormSubmit}>
     <div>
@@ -49,28 +49,28 @@ const Form = ({
     <Button status="disabled">disabled</Button>
     <Button status="error">error</Button>
   </form>
-)
+);
 
 const Home: NextPage = () => {
-  const [apps, setApps] = useState([])
-  globalStyles()
+  const [apps, setApps] = useState([]);
+  globalStyles();
 
   const getApps = async () => {
     try {
       const appsResponse = await fetch('/api/apps', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-      }).then(x => x.json())
+      }).then((x) => x.json());
 
-      setApps(appsResponse.data)
+      setApps(appsResponse.data);
     } catch (error) {
-      console.log('could not get apps')
+      console.log('could not get apps');
     }
-  }
+  };
 
   useEffect(() => {
-    getApps()
-  }, [])
+    getApps();
+  }, []);
 
   return (
     <div>
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
 
       <h1>Apps to build</h1>
       {apps.map(({ name, type, priority, notes }) => (
-        <div>name: {name}</div>
+        <div key={name}>name: {name}</div>
       ))}
       <br />
       <br />
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
       <br />
       <Form handleFormSubmit={handleFormSubmit} />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
