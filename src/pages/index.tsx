@@ -1,76 +1,38 @@
-import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Button, Input } from '~/shared/components';
 import { globalStyles } from '~/shared/styles/reset';
-
-const addApp = async (formData: any) => {
-  return await fetch('/api/apps', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(Object.fromEntries(formData)),
-  }).then((x) => x.json());
-};
-
-const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  const formElement = document.querySelector('#form');
-  const formData = new FormData(formElement as HTMLFormElement) as any;
-  try {
-    const response = await addApp(formData);
-    if (response.status === 200) {
-      console.log('success');
-    }
-  } catch (error) {
-    console.log('submission failure', error);
-  }
-};
-
-const Form = ({
-  handleFormSubmit,
-}: {
-  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
-}) => (
-  <form id="form" onSubmit={handleFormSubmit}>
-    <div>
-      <Input label="name" name="name" placeholder="name of application" />
-    </div>
-    <div>
-      <Input label="type" name="type" placeholder="type of application" />
-    </div>
-    <div>
-      <Input type="text" label="priority" name="priority" placeholder="priority of application" />
-    </div>
-    <div>
-      <Input label="notes" name="notes" placeholder="notes of application" />
-    </div>
-    <Button>Add</Button>
-    <Button status="loading">loading</Button>
-    <Button status="disabled">disabled</Button>
-    <Button status="error">error</Button>
-  </form>
-);
+import { trpc } from '~/server/utils/trpc';
 
 const Home: NextPage = () => {
-  const [apps, setApps] = useState([]);
   globalStyles();
+  const helloCache = trpc.useQuery(['hello.getAll', { text: 'client' }]);
+  const appsCache = trpc.useQuery(['app.getAll']);
+  const addApp = trpc.useMutation(['app.add']);
 
-  const getApps = async () => {
+  const onSubmitHandler = async (event: any) => {
+    event.preventDefault();
+
+    const name = event.target.elements.name.value;
+    const type = event.target.elements.type.value;
+    const priority = Number(event.target.elements.priority.value);
+    const notes = event.target.elements.notes.value;
+
     try {
-      const appsResponse = await fetch('/api/apps', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      }).then((x) => x.json());
-
-      setApps(appsResponse.data);
+      await addApp.mutateAsync({
+        name,
+        type,
+        priority,
+        notes,
+      });
     } catch (error) {
-      console.log('could not get apps');
+      console.log('could not udpate');
     }
   };
 
-  useEffect(() => {
-    getApps();
-  }, []);
+  if (!helloCache.data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -81,14 +43,28 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Apps to build</h1>
-      {apps.map(({ name, type, priority, notes }) => (
-        <div key={name}>name: {name}</div>
+      {appsCache.data?.map(({ name, priority }) => (
+        <div key={`${name}-${priority}`}>name: {name}</div>
       ))}
       <br />
       <br />
       <br />
-      <br />
-      <Form handleFormSubmit={handleFormSubmit} />
+
+      <form id="form" onSubmit={onSubmitHandler}>
+        <div>
+          <Input label="name" name="name" placeholder="name of application" />
+        </div>
+        <div>
+          <Input label="type" name="type" placeholder="type of application" />
+        </div>
+        <div>
+          <Input type="text" label="priority" name="priority" placeholder="priority of application" />
+        </div>
+        <div>
+          <Input label="notes" name="notes" placeholder="notes of application" />
+        </div>
+        <Button type="submit">Add</Button>
+      </form>
     </div>
   );
 };
