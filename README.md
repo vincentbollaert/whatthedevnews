@@ -22,7 +22,9 @@
 - [x] Add simple endpoint
 - [x] Add simple design guide and CSS reset
 - [x] Add simple Radix components
-- [ ] Add tRPC
+- [x] Extend ESLint config
+- [x] Add tRPC
+- [x] Iterate over implementation of tRPC
 - [ ] Add BFF for consuming API of dev.to, medium, youtube etc. and enforcing a consistent client response
 - [ ] Add localization
 - [ ] Add tests
